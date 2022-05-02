@@ -8,7 +8,7 @@ import notif_creater
 
 data = pd.read_excel("log.xlsx")
 print(data)
-data = data[(data['State']=='Affected') |(data['Status']=="Needed")|(data['Status']=="Needs Triage")|(data['Status']=="Needed")|(data["Status"]=='Deferred')|(data['Status']==("Pending"))]
+#data = data[(data['State']=='Affected') |(data['Status']=="Needed")|(data['Status']=="Needs Triage")|(data['Status']=="Needed")|(data["Status"]=='Deferred')|(data['Status']==("Pending"))]
 #print(data)
 #print(data[["CVE","os_name"]])
 def runcheck():
