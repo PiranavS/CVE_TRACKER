@@ -76,13 +76,15 @@ def Load_table_data():
        #print(df)
        files_present = glob.glob("log.xlsx")
        if not files_present:
-        old_df=df
+        old_df = pd.DataFrame(columns=['CVE','Platform','Package','State','Errata','Release Date','ex_os_name','os_name','Release','Status'])
+        old_df=pd.concat([df,old_df])
         old_df["ex_os_name"]=orig
         old_df['os_name']=os_name+" "+version
         drop_in = old_df.loc[old_df['Package'] == "Not Found"].index
         #print(drop_in)
         old_df=old_df.drop(drop_in)
         drop_in = old_df.loc[old_df['Package'] == "Not Found"].index
+        #print(old_df.columns)
         old_df.to_excel("log.xlsx",index=False)
         print("Transfer done")
        else:
