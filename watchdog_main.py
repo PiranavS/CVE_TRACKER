@@ -5,11 +5,11 @@ import watchdog
 
 from apscheduler.schedulers.background import BackgroundScheduler
 
-
+watchdog.runcheck()
 
 if __name__ == '__main__':
     scheduler = BackgroundScheduler(timezone="Asia/Kolkata")
-    scheduler.add_job(watchdog.runcheck, 'interval', minutes=1)
+    scheduler.add_job(watchdog.runcheck, 'interval', minutes=30)
     scheduler.start()
     print('Press Ctrl+{0} to exit'.format('Break' if os.name == 'nt' else 'C'))
 
