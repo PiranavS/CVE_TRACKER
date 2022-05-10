@@ -7,9 +7,9 @@ import notif_creater
 
 
 data = pd.read_excel("log.xlsx")
-print(data)
-#data = data[(data['State']=='Affected') |(data['Status']=="Needed")|(data['Status']=="Needs Triage")|(data['Status']=="Needed")|(data["Status"]=='Deferred')|(data['Status']==("Pending"))]
 #print(data)
+#data = data[(data['State']=='Affected') |(data['Status']=="Needed")|(data['Status']=="Needs Triage")|(data['Status']=="Needed")|(data["Status"]=='Deferred')|(data['Status']==("Pending"))]
+print(data)
 #print(data[["CVE","os_name"]])
 def runcheck():
  for ind in data.index:
@@ -19,17 +19,19 @@ def runcheck():
      cve_data = cve_data[(cve_data['Platform']==(data['Platform'][ind]))&(cve_data['Package']== data['Package'][ind])]
 
   if data['os_name'][ind].startswith("Ubuntu"):
+     #print(data['CVE'][ind])
      cve_data = ubuntu_cve_scrapes.ubu_scrape(data['CVE'][ind])
      #print(cve_data)
      os = data['os_name'][ind]
-     os = os.split()[0]+" "+os.split()[2]
+     os = os.split()[2]
      #print(os)
+     #print(cve_data)
      cve_data = cve_data[(cve_data['Release'].str.contains(os,regex=False,na=False))]
 
   print(cve_data)
   flag = 0
   try: 
-     if cve_data['Status'].str.contains("Released",regex=False,na=False) :
+     if cve_data['Status'].iloc[0].startswith("Released") :
         flag =1 
   except:
      if cve_data['State'].iloc[0]=="Fixed":
